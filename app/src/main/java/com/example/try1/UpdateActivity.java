@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class UpdateActivity extends AppCompatActivity {
 
     EditText MedicationNameUp,MedicationTypeUp,MedicationCountUp;
     Button update_btn;
+
+    String id, name, type, count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +32,18 @@ public class UpdateActivity extends AppCompatActivity {
         });
     }
 
-    void
+    void getAndSetIntentData() {
+        if (getIntent().hasExtra("id") && getIntent().hasExtra("name")
+                && getIntent().hasExtra("type")&& getIntent().hasExtra("count")){
+            id = getIntent().getStringExtra("id");
+            name = getIntent().getStringExtra("name");
+            type = getIntent().getStringExtra("type");
+            count = getIntent().getStringExtra("count");
+
+        }
+        else {
+            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

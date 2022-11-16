@@ -24,7 +24,7 @@ public class MyDetabaceHelper extends SQLiteOpenHelper {
 
 
 
-    public MyDetabaceHelper(@Nullable Context context) {
+     MyDetabaceHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
 
@@ -75,4 +75,22 @@ public class MyDetabaceHelper extends SQLiteOpenHelper {
         return cursor;
 
     }
+
+    void  updateData(String name, String type, String count,String row_id){
+         SQLiteDatabase db = this.getWritableDatabase();
+         ContentValues cv = new ContentValues();
+         cv.put(COLUMN_PILL,name);
+        cv.put(CULUMN_TYPE,type);
+        cv.put(CULUMN_COUNT,count);
+
+        long result = db.update(TABLE_NAME,cv,"_id=?", new String[]{row_id});
+        if (result == -1){
+            Toast.makeText(context, "failed to update", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(context, "update successfully", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }

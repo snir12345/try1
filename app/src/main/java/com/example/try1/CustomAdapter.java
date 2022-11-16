@@ -1,5 +1,6 @@
 package com.example.try1;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +18,11 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
+    Activity activity;
     private ArrayList  Medication_id,Medication_Name, Medication_Type,Medication_Count;
 
-    CustomAdapter(Context context, ArrayList Medication_id, ArrayList Medication_Name, ArrayList Medication_Type, ArrayList Medication_Count){
+    CustomAdapter(Activity activity, Context context, ArrayList Medication_id, ArrayList Medication_Name, ArrayList Medication_Type, ArrayList Medication_Count){
+        this.activity = activity;
         this.context = context;
         this.Medication_id = Medication_id;
         this.Medication_Name = Medication_Name;
@@ -42,7 +46,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.Medication_type_text.setText(String.valueOf(Medication_Type.get(position)));
         holder.Medication_count_text.setText(String.valueOf(Medication_Count.get(position)));
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateActivity.class);
@@ -51,10 +54,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("type",String.valueOf(Medication_Type.get(position)));
                 intent.putExtra("count",String.valueOf(Medication_Count.get(position)));
 
-                context.startActivity(intent);
-
+                activity.startActivityForResult(intent, 1);
             }
         });
+
     }
 
     @Override

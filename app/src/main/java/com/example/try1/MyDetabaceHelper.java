@@ -62,6 +62,7 @@ public class MyDetabaceHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
         }
 
+
     }
 
     Cursor readAllData(){
@@ -102,6 +103,11 @@ public class MyDetabaceHelper extends SQLiteOpenHelper {
          }else{
              Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
          }
+    }
+
+    void deleteAllData(){
+         SQLiteDatabase db = this.getWritableDatabase();
+         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
 
 }

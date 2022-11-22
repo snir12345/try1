@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,8 +20,12 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    Activity activity;
+    private Activity activity;
     private ArrayList  Medication_id,Medication_Name, Medication_Type,Medication_Count;
+
+    Animation translate_anim;
+
+
 
     CustomAdapter(Activity activity, Context context, ArrayList Medication_id, ArrayList Medication_Name, ArrayList Medication_Type, ArrayList Medication_Count){
         this.activity = activity;
@@ -77,6 +83,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             Medication_type_text = itemView.findViewById(R.id.Medication_type_text);
             Medication_count_text = itemView.findViewById(R.id.Medication_count_text);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            // Animate Recyclerview
+            translate_anim = AnimationUtils.loadAnimation(context,R.anim.translate_anim);
+            mainLayout.setAnimation(translate_anim);
 
 
         }

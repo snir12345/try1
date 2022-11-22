@@ -1,14 +1,22 @@
 package com.example.try1;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FloatingActionButton add_btn;
+    TextView NoData;
+    ImageView empty_imageView;
 
     MyDetabaceHelper myDB;
     ArrayList<String> Medication_id,Medication_Type,Medication_Name,Medication_Count;
@@ -29,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
+        empty_imageView = findViewById(R.id.empty_imageView);
+        NoData = findViewById(R.id.NoData);
         add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
     void storeDataArrays (){
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0 ){
-            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+            empty_imageView.setVisibility(View.VISIBLE);
+            NoData.setVisibility(View.VISIBLE);
         }
         else{
             while (cursor.moveToNext()){
@@ -73,6 +86,46 @@ public class MainActivity extends AppCompatActivity {
                 Medication_Type.add(cursor.getString(2));
                 Medication_Count.add(cursor.getString(3));
             }
+            empty_imageView.setVisibility(View.GONE);
+            NoData.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu );
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.delete_all){
+            confirmDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete All?" );
+        builder.setMessage("Are you sure you want to delete all Data? ");
+        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDetabaceHelper myDB = new MyDetabaceHelper(MainActivity.this);
+                myDB.deleteAllData();
+                // Refresh Activity
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }

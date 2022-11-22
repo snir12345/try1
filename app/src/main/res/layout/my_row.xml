@@ -23,17 +23,16 @@
 
             <TextView
                 android:id="@+id/Medication_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="name 1"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:layout_width="58dp"
+                android:layout_height="27dp"
+                android:text="type 1"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.151"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/Medication_type_text"
+                app:layout_constraintHorizontal_bias="0.235"
+                app:layout_constraintStart_toStartOf="@+id/Medication_type_text"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/Medication_id_text"
@@ -52,21 +51,24 @@
 
             <TextView
                 android:id="@+id/Medication_type_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="type 1 "
+                android:layout_width="71dp"
+                android:layout_height="23dp"
+                android:text="name 1 "
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/Medication_name_text"
-                app:layout_constraintHorizontal_bias="0.44"
-                app:layout_constraintStart_toStartOf="@+id/Medication_name_text"
-                app:layout_constraintTop_toBottomOf="@+id/Medication_name_text"
-                app:layout_constraintVertical_bias="0.35" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.114"
+                app:layout_constraintStart_toEndOf="@+id/Medication_id_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.218" />
 
             <TextView
                 android:id="@+id/Medication_count_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7"
+                android:text="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.954"

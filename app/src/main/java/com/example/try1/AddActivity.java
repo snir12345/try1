@@ -30,6 +30,7 @@ public class AddActivity extends AppCompatActivity {
                 myDB.addMedication(MedicationName.getText().toString().trim(),
                         MedicationType.getText().toString().trim(),
                         Integer.valueOf( MedicationCount.getText().toString().trim()));
+                recreate();
             }
         });
     }
